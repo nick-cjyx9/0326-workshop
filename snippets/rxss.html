@@ -1,0 +1,39 @@
+<!-- 
+  反射型 XSS 的利用一般是攻击者通过特定手法（如电子邮件），
+  诱使用户去访问一个包含恶意代码的 URL，
+  当受害者点击这些专门设计的链接的时候，
+  恶意代码会直接在受害者主机上的浏览器执行。
+  此类 XSS 通常出现在网站的搜索栏、用户登录口等地方，
+  常用来窃取客户端 Cookies 或进行钓鱼欺骗。
+-->
+
+<!--
+  DOM 型 XSS DOM 型 XSS 是通过修改网页的 DOM 节点触发的攻击，所有操作均在前端完成。
+  恶意代码的提取和执行由浏览器负责，属于前端 JavaScript 的安全漏洞。
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  <form action="/snippets/rxss.html">
+    <input type="text" name="q">
+    <input type="submit" value="search">
+  </form>
+  <div id="holder"></div>
+  <script>
+    const query = new URLSearchParams(location.search).get('q')
+    if (query) {
+      document.title = `Searching ${query}`
+      // https://developer.mozilla.org/zh-CN/docs/Web/API/Element/innerHTML#%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98
+      holder.innerHTML = `<h2>Search result for ${query}</h2>
+      <ul>
+        <li>choose life?!</li>
+        <li>choose life?!</li>
+      </ul>
+      `
+    }
+  </script>
+</body>
+
+</html>
