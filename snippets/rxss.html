@@ -16,13 +16,13 @@
 <html lang="en">
 
 <body>
-  <form action="/snippets/rxss.html">
+  <form action="/demo/rxss">
     <input type="text" name="q">
     <input type="submit" value="search">
   </form>
   <div id="holder"></div>
   <script>
-    const query = new URLSearchParams(location.search).get('q')
+    const query = new URLSearchParams(window.location.search).get('q')
     if (query) {
       document.title = `Searching ${query}`
       // https://developer.mozilla.org/zh-CN/docs/Web/API/Element/innerHTML#%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98

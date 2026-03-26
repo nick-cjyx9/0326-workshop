@@ -9,34 +9,30 @@
 
 let comments = 'hello\n'
 
-Bun.serve({
-  port: 1337,
-  fetch(req) {
-    if (new URL(req.url).pathname === '/') {
-      return new Response(`
-        <!DOCTYPE html>
-        <html>
-        <body>
-          <h1>Comments of blog xxoo</h1>
-          <textarea disabled>${comments}</textarea>
-          <form action="/set">
-            <input type="text" name="comments" />
-            <input type="submit" value="send" />
-          </form>
-        </body>
-        </html>
-      `, { headers: { "Content-Type": "text/html" } })
-    }
-    
-    if (new URL(req.url).pathname === '/set') {
-      const new_comments = new URL(req.url).searchParams.get('comments')
-      if (new_comments) {
-        comments += new_comments + '\n'
-        return new Response('ok')
-      } else {
-        return new Response('comments needed')
-      }
-    }
-    return new Response(req.url)
-  },
-})
+export function handleStoredXss(url: URL) {
+  if (url.pathname === '/demo/pxss') {
+    return new Response(`
+      <!DOCTYPE html>
+      <html>
+      <body>
+        <h1>Comments of blog xxoo</h1>
+        <textarea disabled>${comments}</textarea>
+        <form action="/demo/pxss/set">
+          <input type="text" name="comments" />
+          <input type="submit" value="send" />
+        </form>
+      </body>
+      </html>
+    `, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+  }
+
+  if (url.pathname === '/demo/pxss/set') {
+    const newComments = url.searchParams.get('comments')
+    if (newComments)
+      comments += `${newComments}\n`
+
+    return Response.redirect(`${url.origin}/demo/pxss`, 302)
+  }
+
+  return null
+}

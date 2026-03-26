@@ -16,13 +16,13 @@ oob 带外方式:
 <html lang="en">
 
 <body>
-  <form action="/snippets/rxss.html">
+  <form action="/demo/steal">
     <input type="text" name="q">
     <input type="submit" value="search">
   </form>
   <div id="holder"></div>
   <script>
-    document.cookie = `flag="flag{xss_target}"`
+    document.cookie = 'flag=flag{xss_target}; path=/'
   </script>
   <script>
     const query = new URLSearchParams(location.search).get('q')

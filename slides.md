@@ -41,7 +41,7 @@ layout: two-cols
 ::right::
 
 
-<IframeBrowser defaultUrl="http://127.0.0.1:1337"></IframeBrowser>
+<IframeBrowser defaultUrl="/demo/pxss"></IframeBrowser>
 
 ---
 layout: two-cols
@@ -57,7 +57,7 @@ layout: two-cols
 
 ::right::
 
-<IframeBrowser defaultUrl="http://127.0.0.1:5500/snippets/rxss.html"></IframeBrowser>
+<IframeBrowser defaultUrl="/demo/rxss"></IframeBrowser>
 
 
 ---
@@ -74,7 +74,7 @@ layout: two-cols
 
 ::right::
 
-<IframeBrowser defaultUrl="http://127.0.0.1:5500/snippets/steal.html"></IframeBrowser>
+<IframeBrowser defaultUrl="/demo/steal"></IframeBrowser>
 
 ---
 
@@ -111,7 +111,7 @@ layout: two-cols
 - waf eventHandler `on`
 
 ```html
-<!-- javascript 伪协议, 可结合 open redirect 漏洞 -->
+<!-- javascript 伪协议, 可结合 open redirect 漏洞, e.g. https://www.saroprock.com/login?redirect=javascript:alert(localStorage.guest_user) -->
  <!-- https://hello-ctf.com/hc-web/xss/#dom-xss -->
 <iframe/src="javascript:alert(1)">
 ```
@@ -120,7 +120,7 @@ layout: two-cols
 
 ```js
 alert`1`
-
+// 解释：https://blog.huli.tw/2021/10/25/learn-frontend-from-security-pov/#:~:text=%E9%82%A3%E5%A6%82%E6%9E%9C%E7%8F%BE%E5%9C%A8%E9%80%A3%E5%8F%8D%E5%BC%95%E8%99%9F%E9%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%E5%91%A2
 onerror=eval;throw "=alert\x281\x29"
 ```
 
@@ -195,5 +195,5 @@ onerror=eval;throw "=alert\x281\x29"
 # 作业
 
 - 完成 google bug hunter <https://xss-game.appspot.com/> 的六个挑战，写简单的 wp
-- 不使用 AI，仅使用搜索引擎，尝试解出 LaCTF job-board (<https://ctf.cumt.edu.cn/training/19?challenge=619>)
+- 尽量少 AI，仅使用搜索引擎，尝试解出 LaCTF job-board (<https://ctf.cumt.edu.cn/training/19?challenge=619>)
 - 选做 N1CTF Junior Notes (附件在[飞书文档](https://ycnpzxasj1cw.feishu.cn/wiki/OG1Fw5mwUikEfJkDIdjcwHwinzf))

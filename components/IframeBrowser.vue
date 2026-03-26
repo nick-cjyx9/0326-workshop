@@ -56,7 +56,15 @@ const canForward = computed(() => state.index < state.history.length - 1)
 
 function normalizeUrl(input) {
   if (!input) return props.defaultUrl
-  try { return new URL(input).toString() } catch { try { return new URL('https://' + input).toString() } catch { return props.defaultUrl } }
+  try {
+    return new URL(input, window.location.href).toString()
+  } catch {
+    try {
+      return new URL('https://' + input).toString()
+    } catch {
+      return props.defaultUrl
+    }
+  }
 }
 
 function navigate(url) {
